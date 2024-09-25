@@ -26,10 +26,24 @@ add_filter('the_content', "highlight_ext_links", 1);
 
 function highlight_ext_links($content) {
 
-    //TO DO: add validation - check which <a></a> is external link
+    // get page URL
+    $home_url = home_url();
 
-    //FIRST STAGE - highlight all links
-    $content = str_replace("<a ","<a class='highlight' ",$content);
+    // pregmatch
+    $pattern = '/<a (.*?)href=["\'](.*?)["\'](.*?)>/i';
+
+    //highlight external links
+    $content = preg_replace_callback($pattern, function ($matches) use ($home_url) {
+        $link_url = $matches[2]; // second elements is link url
+
+        // check if url is external
+        if (strpos($link_url, $home_url) === false) {
+            // add class .highlight
+            return '<a ' . $matches[1] . 'href="' . $link_url . '" class="highlight"' . $matches[3] . '>';
+        }
+
+        return $matches[0]; //return original link if is intermal
+    }, $content);
 
     return $content;
 }
