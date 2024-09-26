@@ -6,5 +6,5 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
-    'Pixelpath\\TopMessagePlugin\\' => array($baseDir . '/inc'),
+    'Pixelpath\\HighlightLink\\' => array($baseDir . '/inc'),
 );

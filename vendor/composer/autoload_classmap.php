@@ -7,7 +7,6 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
-    'PixelPath\\TopMessagePlugin\\Classes\\SettingsPage' => $baseDir . '/inc/Classes/SettingsPage.php',
-    'PixelPath\\TopMessagePlugin\\Classes\\SimpleMSG' => $baseDir . '/inc/Classes/SimpleMSG.php',
-    'PixelPath\\TopMessagePlugin\\Interfaces\\HookContent' => $baseDir . '/inc/Interfaces/HookContent.php',
+    'PixelPath\\HighlightLink\\Classes\\SettingsPage' => $baseDir . '/inc/Classes/SettingsPage.php',
+    'PixelPath\\HighlightLink\\Interfaces\\HookContent' => $baseDir . '/inc/Interfaces/HookContent.php',
 );

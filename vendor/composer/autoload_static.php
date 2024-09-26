@@ -9,12 +9,12 @@ class ComposerStaticInitbdea05cc3dd049c422b09e92ed93ff8e
     public static $prefixLengthsPsr4 = array (
         'P' => 
         array (
-            'Pixelpath\\TopMessagePlugin\\' => 27,
+            'Pixelpath\\HighlightLink\\' => 24,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'Pixelpath\\TopMessagePlugin\\' => 
+        'Pixelpath\\HighlightLink\\' => 
         array (
             0 => __DIR__ . '/../..' . '/inc',
         ),
@@ -22,9 +22,8 @@ class ComposerStaticInitbdea05cc3dd049c422b09e92ed93ff8e
 
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
-        'PixelPath\\TopMessagePlugin\\Classes\\SettingsPage' => __DIR__ . '/../..' . '/inc/Classes/SettingsPage.php',
-        'PixelPath\\TopMessagePlugin\\Classes\\SimpleMSG' => __DIR__ . '/../..' . '/inc/Classes/SimpleMSG.php',
-        'PixelPath\\TopMessagePlugin\\Interfaces\\HookContent' => __DIR__ . '/../..' . '/inc/Interfaces/HookContent.php',
+        'PixelPath\\HighlightLink\\Classes\\SettingsPage' => __DIR__ . '/../..' . '/inc/Classes/SettingsPage.php',
+        'PixelPath\\HighlightLink\\Interfaces\\HookContent' => __DIR__ . '/../..' . '/inc/Interfaces/HookContent.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
