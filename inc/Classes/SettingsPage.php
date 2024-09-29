@@ -14,8 +14,6 @@ if(!class_exists('SettingsPage')) {
         {
             //top level menu page
             add_action( 'admin_menu', array($this, 'toplevel_options_page'));
-            //add options page to admin Settings page
-            add_action('admin_menu', array($this, 'create_settings_page'));
             //register inputs to set values
             add_action('admin_init', array($this, 'register_settings'));
 
@@ -29,6 +27,7 @@ if(!class_exists('SettingsPage')) {
             return self::$instance;
         }
 
+        //top level menu in admin page
         function toplevel_options_page() {
             add_menu_page(
                 'Highlighter',
@@ -41,21 +40,19 @@ if(!class_exists('SettingsPage')) {
             );
         }
 
+        //The function to be called to output the content for Highlighter page.
         public function options_page_html() {
-
-        }
-        
-
-        //callback function for add action hook admin menu 
-        public function create_settings_page() {
-            //add option page in Settings
-            add_options_page(
-                'Highlighter Settings', 
-                'Highlighter', 
-                'manage_options', 
-                'highlighter-settings', 
-                array($this, 'settings_page_html')
-            );
+            ?>
+            <div class="wrap">
+                <form method="post" action="options.php">
+                    <?php
+                    settings_fields('highlighter-settings-group');
+                    do_settings_sections('highlighter');
+                    submit_button();
+                    ?>
+                </form>
+            </div>
+            <?php
         }
 
         //callback function for add action hook admin init 
@@ -63,34 +60,46 @@ if(!class_exists('SettingsPage')) {
             //register 2 variables:  bgColor and textColor
             register_setting('highlighter-settings-group', 'highlighter_bg_color');
             register_setting('highlighter-settings-group', 'highlighter_text_color');
+
+             // Add settings section
+             add_settings_section(
+                'highlighter_settings_section',
+                'Customize Highlighter Settings',
+                null,
+                'highlighter'
+            );
+
+            // Add background color field
+            add_settings_field(
+                'highlighter_bg_color',
+                'Background Color',
+                array($this, 'bg_color_field_html'),
+                'highlighter',
+                'highlighter_settings_section'
+            );
+
+            // Add text color field
+            add_settings_field(
+                'highlighter_text_color',
+                'Text Color',
+                array($this, 'text_color_field_html'),
+                'highlighter',
+                'highlighter_settings_section'
+            );
         }
 
-
-        //options visible on admin panel
-        public function settings_page_html() {
+        public function bg_color_field_html() {
             ?>
-            <div class="wrap">
-                <h1>Highlighter Settings</h1>
-                <form method="post" action="options.php">
-                    <?php settings_fields('highlighter-settings-group'); ?>
-                    <?php do_settings_sections('highlighter-settings-group'); ?>
-                    <table class="form-table">
-                        <!-- bg color -->
-                        <tr valign="top">
-                            <th scope="row">Background Color</th>
-                            <td><input type="color" name="highlighter_bg_color" placeholder="#FFFFFF" value="<?php echo esc_attr(get_option('highlighter_bg_color')); ?>" /></td>
-                        </tr>
-                        <!-- text color -->
-                        <tr valign="top">
-                            <th scope="row">Text Color</th>
-                            <td><input type="color" name="highlighter_text_color" placeholder="#000000" value="<?php echo esc_attr(get_option('highlighter_text_color')); ?>" /></td>
-                        </tr>
-                    </table>
-                    <?php submit_button(); ?>
-                </form>
-            </div>
+            <input type="color" name="highlighter_bg_color" placeholder="#FFFFFF" value="<?php echo esc_attr(get_option('highlighter_bg_color')); ?>" />
             <?php
         }
+
+        public function text_color_field_html() {
+            ?>
+            <input type="color" name="highlighter_text_color" placeholder="#000000" value="<?php echo esc_attr(get_option('highlighter_text_color')); ?>" />
+            <?php
+        }
+
         
     }
 }

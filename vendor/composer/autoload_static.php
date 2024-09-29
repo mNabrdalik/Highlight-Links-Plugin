@@ -22,6 +22,7 @@ class ComposerStaticInitbdea05cc3dd049c422b09e92ed93ff8e
 
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
+        'PixelPath\\HighlightLink\\Classes\\CustomizeLink' => __DIR__ . '/../..' . '/inc/Classes/CustomizeLink.php',
         'PixelPath\\HighlightLink\\Classes\\SettingsPage' => __DIR__ . '/../..' . '/inc/Classes/SettingsPage.php',
         'PixelPath\\HighlightLink\\Interfaces\\HookContent' => __DIR__ . '/../..' . '/inc/Interfaces/HookContent.php',
     );

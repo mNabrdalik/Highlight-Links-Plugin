@@ -7,6 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
+    'PixelPath\\HighlightLink\\Classes\\CustomizeLink' => $baseDir . '/inc/Classes/CustomizeLink.php',
     'PixelPath\\HighlightLink\\Classes\\SettingsPage' => $baseDir . '/inc/Classes/SettingsPage.php',
     'PixelPath\\HighlightLink\\Interfaces\\HookContent' => $baseDir . '/inc/Interfaces/HookContent.php',
 );

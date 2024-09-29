@@ -32,13 +32,11 @@ if(!class_exists('CustomizeLink')) {
             //highlight external links - preg_replace_callback($pattern, $callback [anonymous function, thats why add use with variable]) - php function
             $content = preg_replace_callback($pattern, function ($matches) use ($home_url) {
                 $link_url = $matches[2]; // second elements is link url
-
                 // check if url is external
                 if (strpos($link_url, $home_url) === false) {
                     // add class .highlight
-                    return '<a ' . $matches[1] . 'href="' . $link_url . '" class="highlight"' . $matches[3] . '>';
+                    return '<a ' . $matches[1] . 'href="' . $link_url . '" class="highlight" style="background-color: ' . esc_attr($this->bgColor) . '; color: ' . esc_attr($this->textColor) . ';"' . $matches[3] . '>';
                 }
-
                 return $matches[0]; //return original link if is intermal
             }, $content);
 

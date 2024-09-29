@@ -11,6 +11,11 @@
  * Text Domain:       msg-oop
  */
 
+//load autolaoder from composer
+require_once __DIR__ . '/vendor/autoload.php';
+
+use PixelPath\HighlightLink\Classes\CustomizeLink;
+use PixelPath\HighlightLink\Classes\SettingsPage;
 
 //style init
 add_action( 'wp_enqueue_scripts','enqueue_styles');
@@ -20,3 +25,12 @@ function enqueue_styles() {
     wp_register_style('highlight-links-style', plugins_url('style.css',__FILE__));
     wp_enqueue_style('highlight-links-style');
 }
+
+//settings page with options
+new SettingsPage();
+
+//text content in top of the page
+new CustomizeLink(
+    get_option('highlighter_bg_color', '#fffb00'),  //link background color
+    get_option('highlighter_text_color', '#000000'), //text color
+);
