@@ -26,11 +26,12 @@ function enqueue_styles() {
     wp_enqueue_style('highlight-links-style');
 }
 
-//settings page with options
-new SettingsPage();
+//settings page with options - singleton
+SettingsPage::getInstance();
 
-//text content in top of the page
-new CustomizeLink(
-    get_option('highlighter_bg_color', '#fffb00'),  //link background color
-    get_option('highlighter_text_color', '#000000'), //text color
+//higlight external links
+$customLink = new CustomizeLink();
+$customLink->setOptions(
+    get_option('highlighter_bg_color', '#fffb00'),
+    get_option('highlighter_text_color', '#000000')
 );

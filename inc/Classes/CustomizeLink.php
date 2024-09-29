@@ -10,13 +10,20 @@ if(!class_exists('CustomizeLink')) {
     //create CustomizeLink class
     class CustomizeLink implements HookContent {
 
-        //variables value set in SettingsPage
-        public function __construct(public string $bgColor = "#fffb00", public string $textColor = "#000000")
-        {
-        
-            add_filter('the_content', array($this, "modify_content"), 1);
 
+        private $bgColor;
+        private $textColor;
+
+        public function __construct()
+        {
+            add_filter('the_content', array($this, "modify_content"), 1);
         }
+
+        //variables custom value set in SettingsPage
+        public function setOptions(string $bgColor, string $textColor) {
+            $this->bgColor = $bgColor;
+            $this->textColor = $textColor;
+        }    
 
         //callback function for add action hook wp_head - render text div
         public function modify_content($content) {
@@ -35,7 +42,7 @@ if(!class_exists('CustomizeLink')) {
                 // check if url is external
                 if (strpos($link_url, $home_url) === false) {
                     // add class .highlight
-                    return '<a ' . $matches[1] . 'href="' . $link_url . '" class="highlight" style="background-color: ' . esc_attr($this->bgColor) . '; color: ' . esc_attr($this->textColor) . ';"' . $matches[3] . '>';
+                    return '<a ' . esc_attr($matches[1]) . 'href="' . esc_url($link_url) . '" class="highlight" style="background-color: ' . esc_attr($this->bgColor) . '; color: ' . esc_attr($this->textColor) . ';"' . esc_attr($matches[3]) . '>';
                 }
                 return $matches[0]; //return original link if is intermal
             }, $content);

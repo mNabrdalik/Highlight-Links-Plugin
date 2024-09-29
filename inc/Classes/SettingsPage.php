@@ -10,7 +10,7 @@ if(!class_exists('SettingsPage')) {
 
         private static $instance = null;
 
-        public function __construct()
+        private function __construct()
         {
             //top level menu page
             add_action( 'admin_menu', array($this, 'toplevel_options_page'));
@@ -46,8 +46,11 @@ if(!class_exists('SettingsPage')) {
             <div class="wrap">
                 <form method="post" action="options.php">
                     <?php
+                    //Outputs option_page fields for a settings page.
                     settings_fields('highlighter-settings-group');
+                    //Prints out all settings sections added to a particular settings page.
                     do_settings_sections('highlighter');
+
                     submit_button();
                     ?>
                 </form>
@@ -58,8 +61,8 @@ if(!class_exists('SettingsPage')) {
         //callback function for add action hook admin init 
         public function register_settings() {
             //register 2 variables:  bgColor and textColor
-            register_setting('highlighter-settings-group', 'highlighter_bg_color');
-            register_setting('highlighter-settings-group', 'highlighter_text_color');
+            register_setting('highlighter-settings-group', 'highlighter_bg_color', 'sanitize_hex_color');
+            register_setting('highlighter-settings-group', 'highlighter_text_color', 'sanitize_hex_color');
 
              // Add settings section
              add_settings_section(
